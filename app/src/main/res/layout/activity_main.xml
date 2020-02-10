@@ -20,6 +20,7 @@
 
                 <com.google.android.material.tabs.TabItem
                     android:id="@+id/tab_rock_music"
+                    android:icon="@drawable/ic_music_note_black_24dp"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
@@ -29,10 +30,12 @@
                     android:id="@+id/tab_classic_music"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/tab_text_classic" />
+                    android:text="@string/tab_text_classic"
+                    android:icon="@drawable/ic_home_black_24dp"/>
 
                 <com.google.android.material.tabs.TabItem
                     android:id="@+id/tab_pop_music"
+                    android:icon="@drawable/ic_pan_tool_black_24dp"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/tab_text_pop" />

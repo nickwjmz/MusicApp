@@ -1,27 +1,16 @@
 package com.example.musicapp.view
 
-import android.content.ContentValues.TAG
-import android.content.Context
-import android.content.Context.*
-import android.media.AudioManager
-import android.media.MediaPlayer
 import android.net.ConnectivityManager
 import android.net.Uri
 import android.os.AsyncTask
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.os.PersistableBundle
 import android.util.Log
-import android.view.View
-import android.widget.TabHost
-import androidx.core.content.ContextCompat.getSystemService
-import com.example.musicapp.AppleMusicResponse
-import com.example.musicapp.FragmentGenre
-import com.example.musicapp.MusicItem
+import com.example.musicapp.model.AppleMusicResponse
+import com.example.musicapp.model.MusicItem
 import com.example.musicapp.R
 import com.google.android.material.tabs.TabItem
 import com.google.android.material.tabs.TabLayout
-import com.google.gson.JsonNull
 import kotlinx.android.synthetic.main.activity_main.*
 import org.json.JSONException
 import org.json.JSONObject
@@ -184,7 +173,8 @@ class MainActivity : AppCompatActivity() {
             )
             listOfMusic.add(musicItem)
         }
-        dataMusicResponse = AppleMusicResponse(listOfMusic)
+        dataMusicResponse =
+            AppleMusicResponse(listOfMusic)
         return dataMusicResponse
     }
 

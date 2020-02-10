@@ -1,4 +1,4 @@
-package com.example.musicapp
+package com.example.musicapp.model
 
 data class AppleMusicResponse(var results: List<MusicItem>)
 

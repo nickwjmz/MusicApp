@@ -1,6 +1,5 @@
-package com.example.musicapp
+package com.example.musicapp.presenter
 
-import android.content.Context
 import android.media.AudioManager
 import android.media.MediaPlayer
 import android.view.LayoutInflater
@@ -9,14 +8,21 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import com.example.musicapp.R
+import com.example.musicapp.model.AppleMusicResponse
 import com.squareup.picasso.Picasso
 
 class CustomAdapter() : RecyclerView.Adapter<CustomAdapter.CustomViewHolder>() {
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CustomViewHolder =
-        CustomViewHolder(LayoutInflater.from(parent.context)
-            .inflate(R.layout.music_layout, parent, false)
-    )
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int):
+            CustomViewHolder =
+        CustomViewHolder(
+            LayoutInflater.from(parent.context).inflate(
+                R.layout.music_layout,
+                parent,
+                false
+            )
+        )
 
     var dataSet: AppleMusicResponse? = null
 
@@ -58,6 +64,5 @@ class CustomAdapter() : RecyclerView.Adapter<CustomAdapter.CustomViewHolder>() {
             tvTrackName = itemView.findViewById(R.id.tv_track_name)
             viewGroup = itemView.findViewById(R.id.music_holder)
         }
-
     }
 }

@@ -1,4 +1,4 @@
-package com.example.musicapp
+package com.example.musicapp.view
 
 import android.content.Context
 import android.os.Bundle
@@ -7,6 +7,9 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.musicapp.R
+import com.example.musicapp.model.AppleMusicResponse
+import com.example.musicapp.presenter.CustomAdapter
 import kotlinx.android.synthetic.main.layout_fragment_genre.*
 
 class FragmentGenre: Fragment() {
@@ -15,7 +18,7 @@ class FragmentGenre: Fragment() {
 
     // Static reference of object for parent class.
     companion object{
-        fun newInstance(): FragmentGenre{
+        fun newInstance(): FragmentGenre {
             return FragmentGenre()
         }
     }
