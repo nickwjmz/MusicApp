@@ -3,13 +3,17 @@ package com.example.musicapp.view
 import android.content.ContentValues.TAG
 import android.content.Context
 import android.content.Context.*
+import android.media.AudioManager
+import android.media.MediaPlayer
 import android.net.ConnectivityManager
 import android.net.Uri
 import android.os.AsyncTask
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.os.PersistableBundle
 import android.util.Log
 import android.view.View
+import android.widget.TabHost
 import androidx.core.content.ContextCompat.getSystemService
 import com.example.musicapp.AppleMusicResponse
 import com.example.musicapp.FragmentGenre
@@ -39,7 +43,7 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        var tabLayout: TabLayout = findViewById(R.id.tabs)
+        val tabLayout: TabLayout = findViewById(R.id.tabs)
         val tab1: TabItem? = tab_rock_music
         val tab2: TabItem? = tab_classic_music
         val tab3: TabItem? = tab_pop_music
@@ -62,6 +66,7 @@ class MainActivity : AppCompatActivity() {
 
         })
 
+        tabLayout.getTabAt(1)!!.select()
     }
 
     fun buildURLRequest(genre: String): Uri {
@@ -145,6 +150,11 @@ class MainActivity : AppCompatActivity() {
 
         for (result in 0 until jsonArray.length()) {
             var jsonMusic = jsonArray.getJSONObject(result)
+            var trackName = try {
+                jsonMusic.getString("trackName")
+            } catch (exception: JSONException) {
+                "Track title not specified"
+            }
             var collectionName = try {
                 jsonMusic.getString("collectionName")
             } catch (exception: JSONException) {
@@ -160,11 +170,18 @@ class MainActivity : AppCompatActivity() {
             } catch (exception: JSONException) {
                 "None"
             }
+            var previewUrl = try {
+                jsonMusic.getString("previewUrl")
+            }catch (exception: JSONException) {
+                "Song preview not available"
+            }
             musicItem = MusicItem(
+                trackName,
                 collectionName,
                 artistName,
                 jsonMusic.getString("artworkUrl60"),
-                trackPrice
+                trackPrice,
+                previewUrl
             )
             listOfMusic.add(musicItem)
         }

@@ -5,10 +5,13 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
-import androidx.appcompat.view.menu.ActionMenuItemView
-import androidx.core.net.toUri
 import androidx.recyclerview.widget.RecyclerView
 import com.squareup.picasso.Picasso
+
+private val View.results: Any
+    get() {
+        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    }
 
 class CustomAdapter  : RecyclerView.Adapter<CustomAdapter.CustomViewHolder>() {
 
@@ -28,26 +31,32 @@ class CustomAdapter  : RecyclerView.Adapter<CustomAdapter.CustomViewHolder>() {
     override fun onBindViewHolder(holder: CustomViewHolder, position: Int) {
 
         dataSet?.let {
-            holder.tvCollectionName.text = it.results[position].collectionName
             holder.tvArtistName.text = it.results[position].artistName
-            holder.tvPrice.text = it.results[position].trackPrice
-            //holder.ivAlbumArt = it.results[position]
-
+            holder.tvCollectionName.text = it.results[position].collectionName
+            holder.tvTrackName.text = it.results[position].trackName
+            holder.tvPrice.text = "$ " + it.results[position].trackPrice
+            Picasso.get().load(it.results[position].artworkUrl60).into(holder.ivAlbumArt)
         }
 
     }
+
 
     class CustomViewHolder(itemView: View): RecyclerView.ViewHolder(itemView) {
         var tvCollectionName: TextView
         var tvArtistName: TextView
         var tvPrice: TextView
-        //var ivAlbumArt: ImageView
+        var ivAlbumArt: ImageView
+        var tvTrackName: TextView
+        var viewGroup: ViewGroup = itemView.findViewById(R.id.music_holder)
+
 
         init {
             tvCollectionName = itemView.findViewById(R.id.tv_collection_name)
             tvArtistName = itemView.findViewById(R.id.tv_artist_name)
             tvPrice = itemView.findViewById(R.id.tv_music_price)
-            //ivAlbumArt = itemView.findViewById(R.id.iv_music_image)
+            ivAlbumArt = itemView.findViewById(R.id.iv_music_image)
+            tvTrackName = itemView.findViewById(R.id.tv_track_name)
         }
+
     }
 }
