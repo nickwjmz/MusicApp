@@ -53,7 +53,6 @@ class MainActivity : AppCompatActivity() {
             }
 
             override fun onTabUnselected(p0: TabLayout.Tab?) {
-//                TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
             }
 
             override fun onTabSelected(p0: TabLayout.Tab?) {
@@ -181,7 +180,7 @@ class MainActivity : AppCompatActivity() {
                 artistName,
                 jsonMusic.getString("artworkUrl60"),
                 trackPrice,
-                previewUrl
+                jsonMusic.getString("previewUrl")
             )
             listOfMusic.add(musicItem)
         }

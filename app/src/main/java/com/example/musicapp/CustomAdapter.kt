@@ -1,5 +1,8 @@
 package com.example.musicapp
 
+import android.content.Context
+import android.media.AudioManager
+import android.media.MediaPlayer
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -8,23 +11,14 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.squareup.picasso.Picasso
 
-private val View.results: Any
-    get() {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
-    }
+class CustomAdapter() : RecyclerView.Adapter<CustomAdapter.CustomViewHolder>() {
 
-class CustomAdapter  : RecyclerView.Adapter<CustomAdapter.CustomViewHolder>() {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CustomViewHolder =
+        CustomViewHolder(LayoutInflater.from(parent.context)
+            .inflate(R.layout.music_layout, parent, false)
+    )
 
     var dataSet: AppleMusicResponse? = null
-
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) =
-        CustomViewHolder(LayoutInflater.from(parent.context)
-            .inflate(
-                R.layout.music_layout,
-                parent,
-                false
-        )
-    )
 
     override fun getItemCount() = dataSet?.results?.size ?: 0
 
@@ -36,10 +30,17 @@ class CustomAdapter  : RecyclerView.Adapter<CustomAdapter.CustomViewHolder>() {
             holder.tvTrackName.text = it.results[position].trackName
             holder.tvPrice.text = "$ " + it.results[position].trackPrice
             Picasso.get().load(it.results[position].artworkUrl60).into(holder.ivAlbumArt)
+            holder.viewGroup.setOnClickListener {
+                var url = dataSet!!.results[position].previewUrl // your URL here
+                var mediaPlayer: MediaPlayer? = MediaPlayer().apply {
+                    this.setAudioStreamType(AudioManager.STREAM_MUSIC) //to send the object to the initialized state
+                    setDataSource(url) //to set media source and send the object to the initialized state
+                    prepare() //to send the object to the prepared state, this may take time for fetching and decoding
+                    start() //to start the music and send the object to started state
+                }
+            }
         }
-
     }
-
 
     class CustomViewHolder(itemView: View): RecyclerView.ViewHolder(itemView) {
         var tvCollectionName: TextView
@@ -47,8 +48,7 @@ class CustomAdapter  : RecyclerView.Adapter<CustomAdapter.CustomViewHolder>() {
         var tvPrice: TextView
         var ivAlbumArt: ImageView
         var tvTrackName: TextView
-        var viewGroup: ViewGroup = itemView.findViewById(R.id.music_holder)
-
+        var viewGroup: ViewGroup
 
         init {
             tvCollectionName = itemView.findViewById(R.id.tv_collection_name)
@@ -56,6 +56,7 @@ class CustomAdapter  : RecyclerView.Adapter<CustomAdapter.CustomViewHolder>() {
             tvPrice = itemView.findViewById(R.id.tv_music_price)
             ivAlbumArt = itemView.findViewById(R.id.iv_music_image)
             tvTrackName = itemView.findViewById(R.id.tv_track_name)
+            viewGroup = itemView.findViewById(R.id.music_holder)
         }
 
     }
