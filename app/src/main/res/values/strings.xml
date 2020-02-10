@@ -1,6 +1,7 @@
 <resources>
     <string name="app_name">MusicApp</string>
-    <string name="tab_text_rock">Rock</string>
-    <string name="tab_text_pop">Pop</string>
-    <string name="tab_text_classic">Classic</string>
+    <string name="tab_text_rock">rock</string>
+    <string name="tab_text_pop">pop</string>
+    <string name="tab_text_classic">classic</string>
+    <string name="text_no_price">None listed</string>
 </resources>
