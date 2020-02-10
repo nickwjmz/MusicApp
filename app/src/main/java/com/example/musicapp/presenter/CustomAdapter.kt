@@ -12,7 +12,7 @@ import com.example.musicapp.R
 import com.example.musicapp.model.AppleMusicResponse
 import com.squareup.picasso.Picasso
 
-class CustomAdapter() : RecyclerView.Adapter<CustomAdapter.CustomViewHolder>() {
+class CustomAdapter(val listener: InterfacePlayer) : RecyclerView.Adapter<CustomAdapter.CustomViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int):
             CustomViewHolder =
@@ -38,13 +38,9 @@ class CustomAdapter() : RecyclerView.Adapter<CustomAdapter.CustomViewHolder>() {
             Picasso.get().load(it.results[position].artworkUrl60).into(holder.ivAlbumArt)
             holder.viewGroup.setOnClickListener {
                 var url = dataSet!!.results[position].previewUrl // your URL here
-                var mediaPlayer: MediaPlayer? = MediaPlayer().apply {
-                    this.setAudioStreamType(AudioManager.STREAM_MUSIC) //to send the object to the initialized state
-                    setDataSource(url) //to set media source and send the object to the initialized state
-                    prepare() //to send the object to the prepared state, this may take time for fetching and decoding
-                    start() //to start the music and send the object to started state
+                listener.playSong(url)
                 }
-            }
+
         }
     }
 

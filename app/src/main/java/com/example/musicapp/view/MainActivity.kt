@@ -40,10 +40,8 @@ class MainActivity : AppCompatActivity() {
         tabLayout.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {
             override fun onTabReselected(p0: TabLayout.Tab?) {
             }
-
             override fun onTabUnselected(p0: TabLayout.Tab?) {
             }
-
             override fun onTabSelected(p0: TabLayout.Tab?) {
                 val uri = buildURLRequest(
                     // This sets QUERY_PARAM equal to the text value specified in each tab in XML
@@ -51,9 +49,7 @@ class MainActivity : AppCompatActivity() {
                 )
                 MyAsynctask().execute(uri)
             }
-
         })
-
         tabLayout.getTabAt(1)!!.select()
     }
 
